@@ -43,8 +43,9 @@ from __future__ import annotations
 import uuid
 from typing import Any
 
-from ptca.constants import NODES, PHASES, SLOTS
+from ptca.constants import PHASES, SLOTS
 from ptca.exchange import Exchange, ExchangeResult
+from ptca.primes import PRIME_SETS, PrimeSet
 from ptca.provenance import build_block, extend_chain, hash_block
 from ptca.sentinels import SentinelState
 from ptca.tensor import PTCATensor
@@ -83,11 +84,23 @@ class PTCAInstance:
         bounds: dict[str, Any] | None = None,
         approved: bool = False,
         max_context_entries: int = 256,
+        prime_set: PrimeSet | str = "first53",
     ) -> None:
         self.session_id = session_id or uuid.uuid4().hex
 
+        # Resolve prime set
+        if isinstance(prime_set, str):
+            if prime_set not in PRIME_SETS:
+                raise KeyError(
+                    f"Unknown prime set {prime_set!r}. "
+                    f"Available: {sorted(PRIME_SETS)}"
+                )
+            self.prime_set: PrimeSet = PRIME_SETS[prime_set]
+        else:
+            self.prime_set = prime_set
+
         # Core PTCA objects
-        self.tensor = PTCATensor()
+        self.tensor = PTCATensor(nodes=self.prime_set.node_count)
         self.sentinel_state = SentinelState()
         self._exchange = Exchange(self.tensor, self.sentinel_state)
 
@@ -156,6 +169,14 @@ class PTCAInstance:
     @property
     def memory_store(self) -> dict[str, Any]:
         return self.sentinel_state.s7.store
+
+    # ------------------------------------------------------------------
+    # Prime set — node lookup
+    # ------------------------------------------------------------------
+
+    def node_for_prime(self, p: int) -> int:
+        """Return the 0-based node index for prime *p* in this instance's prime set."""
+        return self.prime_set.node_for_prime(p)
 
     # ------------------------------------------------------------------
     # S1 — Provenance
@@ -322,6 +343,7 @@ class PTCAInstance:
         s = self.sentinel_state
         return {
             "session_id": self.session_id,
+            "prime_set": self.prime_set.name,
             "S5_CONTEXT": {
                 "entries": s.s5.entries,
                 "token_count": s.s5.token_count,

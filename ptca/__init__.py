@@ -38,7 +38,11 @@ from ptca.constants import (
 )
 from ptca.exchange import Exchange, ExchangeResult, compute_score, aggregate_seeds
 from ptca.instance import PTCAInstance
-from ptca.primes import PRIME_NODES, PRIME_TO_NODE, node_for_prime, prime_for_node
+from ptca.primes import (
+    PRIME_NODES, PRIME_TO_NODE, node_for_prime, prime_for_node,
+    PrimeSet, PRIME_SETS,
+    FIRST_53, TWIN_PRIMES, SOPHIE_GERMAIN, SAFE_PRIMES,
+)
 from ptca.provenance import (
     build_block,
     hash_block,
@@ -69,6 +73,8 @@ __all__ = [
     "SENTINEL_NAMES", "SENTINEL_INDEX", "SENTINEL_WEIGHTS",
     # primes
     "PRIME_NODES", "PRIME_TO_NODE", "node_for_prime", "prime_for_node",
+    "PrimeSet", "PRIME_SETS",
+    "FIRST_53", "TWIN_PRIMES", "SOPHIE_GERMAIN", "SAFE_PRIMES",
     # provenance
     "build_block", "hash_block", "chain_hashes", "verify_chain", "extend_chain",
     # sentinels

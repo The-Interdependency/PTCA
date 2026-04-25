@@ -27,24 +27,30 @@ class PTCATensor:
     """
     Zero-dependency 4-D tensor backed by a flat Python list.
 
-    Shape: (NODES, SENTINELS, PHASES, SLOTS) = (53, 9, 8, 7)
-    Total cells: 26 796
+    Default shape: (NODES, SENTINELS, PHASES, SLOTS) = (53, 9, 8, 7)
+
+    Parameters
+    ----------
+    nodes:
+        Number of prime-indexed routing nodes.  Defaults to ``NODES``
+        (53) so that existing call sites are unaffected.  Pass a
+        different value when constructing a tensor for an alternative
+        ``PrimeSet``.
     """
 
-    SHAPE: tuple[int, int, int, int] = (NODES, SENTINELS, PHASES, SLOTS)
-    SIZE: int = NODES * SENTINELS * PHASES * SLOTS
-
-    def __init__(self) -> None:
+    def __init__(self, nodes: int = NODES) -> None:
+        self._nodes: int = nodes
+        self.SHAPE: tuple[int, int, int, int] = (nodes, SENTINELS, PHASES, SLOTS)
+        self.SIZE: int = nodes * SENTINELS * PHASES * SLOTS
         self._data: list[float] = [0.0] * self.SIZE
 
     # ------------------------------------------------------------------
     # Internal indexing
     # ------------------------------------------------------------------
 
-    @staticmethod
-    def _idx(node: int, sentinel: int, phase: int, slot: int) -> int:
-        if not (0 <= node < NODES):
-            raise IndexError(f"node {node} out of range [0, {NODES})")
+    def _idx(self, node: int, sentinel: int, phase: int, slot: int) -> int:
+        if not (0 <= node < self._nodes):
+            raise IndexError(f"node {node} out of range [0, {self._nodes})")
         if not (0 <= sentinel < SENTINELS):
             raise IndexError(f"sentinel {sentinel} out of range [0, {SENTINELS})")
         if not (0 <= phase < PHASES):
@@ -84,7 +90,7 @@ class PTCATensor:
     def sentinel_slice(self, sentinel: int) -> list[float]:
         """All values for a given sentinel channel across all nodes/phases/slots."""
         result: list[float] = []
-        for n in range(NODES):
+        for n in range(self._nodes):
             for ph in range(PHASES):
                 for sl in range(SLOTS):
                     result.append(self._data[self._idx(n, sentinel, ph, sl)])
@@ -93,7 +99,7 @@ class PTCATensor:
     def phase_slice(self, phase: int) -> list[float]:
         """All values for a given phase across all nodes/sentinels/slots."""
         result: list[float] = []
-        for n in range(NODES):
+        for n in range(self._nodes):
             for s in range(SENTINELS):
                 for sl in range(SLOTS):
                     result.append(self._data[self._idx(n, s, phase, sl)])
@@ -102,7 +108,7 @@ class PTCATensor:
     def slot_slice(self, slot: int) -> list[float]:
         """All values for a given heptagram slot across all nodes/sentinels/phases."""
         result: list[float] = []
-        for n in range(NODES):
+        for n in range(self._nodes):
             for s in range(SENTINELS):
                 for ph in range(PHASES):
                     result.append(self._data[self._idx(n, s, ph, slot)])
@@ -137,7 +143,7 @@ class PTCATensor:
         Any axis left as ``None`` is summed/averaged over.
         ``method`` is ``'mean'`` or ``'sum'``.
         """
-        nodes = [node] if node is not None else list(range(NODES))
+        nodes = [node] if node is not None else list(range(self._nodes))
         sentinels = [sentinel] if sentinel is not None else list(range(SENTINELS))
         phases = [phase] if phase is not None else list(range(PHASES))
         slots = [slot] if slot is not None else list(range(SLOTS))

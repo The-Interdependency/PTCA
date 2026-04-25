@@ -104,3 +104,39 @@ def test_repr():
     t = PTCATensor()
     r = repr(t)
     assert "PTCATensor" in r
+
+
+# ---------------------------------------------------------------------------
+# Variable node count
+# ---------------------------------------------------------------------------
+
+def test_custom_node_count_shape():
+    t = PTCATensor(nodes=10)
+    assert t.SHAPE == (10, SENTINELS, PHASES, SLOTS)
+    assert t.SIZE == 10 * SENTINELS * PHASES * SLOTS
+    assert len(t) == t.SIZE
+
+
+def test_custom_node_count_set_get():
+    t = PTCATensor(nodes=5)
+    t.set(4, 0, 0, 0, 7.0)
+    assert t.get(4, 0, 0, 0) == pytest.approx(7.0)
+
+
+def test_custom_node_count_out_of_range():
+    t = PTCATensor(nodes=5)
+    with pytest.raises(IndexError):
+        t.get(5, 0, 0, 0)
+
+
+def test_custom_node_count_sentinel_slice_length():
+    t = PTCATensor(nodes=10)
+    assert len(t.sentinel_slice(0)) == 10 * PHASES * SLOTS
+
+
+def test_custom_node_count_aggregate():
+    t = PTCATensor(nodes=3)
+    t.set(0, 0, 0, 0, 3.0)
+    t.set(1, 0, 0, 0, 6.0)
+    total = t.aggregate("sum", sentinel=0, phase=0, slot=0)
+    assert total == pytest.approx(9.0)

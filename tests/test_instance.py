@@ -193,7 +193,6 @@ def test_snapshot_risk():
     snap = inst.snapshot()
     assert snap["S8_RISK"]["score"] == pytest.approx(0.42)
 
-
 # --- repr ---
 
 def test_repr():
@@ -201,3 +200,66 @@ def test_repr():
     r = repr(inst)
     assert "PTCAInstance" in r
     assert "test-model" in r
+
+
+# --- Prime set selection ---
+
+def test_default_prime_set():
+    from ptca.primes import FIRST_53
+    inst = _inst()
+    assert inst.prime_set is FIRST_53
+    assert inst.tensor.SHAPE[0] == 53
+
+
+def test_prime_set_by_name_twin():
+    from ptca.primes import TWIN_PRIMES
+    inst = PTCAInstance(prime_set="twin")
+    assert inst.prime_set is TWIN_PRIMES
+    assert inst.tensor.SHAPE[0] == TWIN_PRIMES.node_count
+
+
+def test_prime_set_by_name_sophie_germain():
+    from ptca.primes import SOPHIE_GERMAIN
+    inst = PTCAInstance(prime_set="sophie_germain")
+    assert inst.prime_set is SOPHIE_GERMAIN
+    assert inst.tensor.SHAPE[0] == SOPHIE_GERMAIN.node_count
+
+
+def test_prime_set_by_name_safe():
+    from ptca.primes import SAFE_PRIMES
+    inst = PTCAInstance(prime_set="safe")
+    assert inst.prime_set is SAFE_PRIMES
+    assert inst.tensor.SHAPE[0] == SAFE_PRIMES.node_count
+
+
+def test_prime_set_by_object():
+    from ptca.primes import TWIN_PRIMES
+    inst = PTCAInstance(prime_set=TWIN_PRIMES)
+    assert inst.prime_set is TWIN_PRIMES
+
+
+def test_prime_set_unknown_name():
+    with pytest.raises(KeyError, match="Unknown prime set"):
+        PTCAInstance(prime_set="nonexistent")
+
+
+def test_node_for_prime_method():
+    from ptca.primes import TWIN_PRIMES
+    inst = PTCAInstance(prime_set="twin")
+    assert inst.node_for_prime(3) == TWIN_PRIMES.node_for_prime(3)
+
+
+def test_snapshot_includes_prime_set():
+    inst = PTCAInstance(prime_set="twin")
+    snap = inst.snapshot()
+    assert snap["prime_set"] == "twin"
+
+
+def test_route_uses_correct_node_count():
+    """Routing to node index within alternate prime set must succeed."""
+    from ptca.primes import SAFE_PRIMES
+    inst = PTCAInstance(prime_set="safe")
+    last_node = SAFE_PRIMES.node_count - 1
+    result = inst.route(node=last_node, phase=0, slot=0, s1=1.0)
+    assert result.score > 0.0
+
