@@ -3,7 +3,7 @@
 ## What this repo is
 
 `ptca-lib` is a zero-dependency pure-Python library that implements the
-**Probabilistic Tensor Context Architecture** used by the
+**Prime Tensor Circular Architecture** used by the
 [erinepshovel-code/aimmh](https://github.com/erinepshovel-code/aimmh) AI hub
 backend.  It is the second extracted component after `aimmh-lib`; the third is
 `EDCM` (erinepshovel-code/EDCM).
