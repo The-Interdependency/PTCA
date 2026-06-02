@@ -13,6 +13,27 @@ from __future__ import annotations
 
 from typing import List
 
+# === MODULE_BUILD ===
+# id: prime_core_constants
+#   module_name: constants
+#   module_kind: engine
+#   summary: frozen PTCA composition counts plus the recursive coherence-prime guard
+#   owner: Erin Spencer
+#   public_surface: SEED_COUNT, CIRCLES_PER_SEED, TENSORS_PER_CIRCLE, TENSOR_DIM, TENSOR_LEAVES, PARAM_COUNT, CIRCLE_ROUTING_STEP, SEED_ROUTING_STEP, is_coherence_prime
+#   internal_surface: _build_coherence_up_to, _is_prime, _prime_factors
+#   auth_boundary: none
+#   storage_boundary: none
+#   network_boundary: none
+#   user_data_boundary: none
+#   admin_only: false
+#   tests: prime_core.tests.test_constants_coherence_prime
+#   rollout: default_enabled (imported by prime_core.core via prime_core.__init__)
+#   rollback: revert is_coherence_prime to the prior frozen-universe implementation
+#   requires: coherence_primes (mirrored from interdependent_lib, not imported — would invert the dependency graph)
+#   since: 2026-06-02 (manifest added; module predates the doctrine)
+#   unresolved: composition counts SEED_COUNT/TENSOR_DIM remain provisional pending the absent canon documents
+# === END MODULE_BUILD ===
+
 # --- composition counts (handoff §1.1, "canon-frozen") -----------------------
 SEED_COUNT: int = 157          # was 53; coherence prime, index (157-1)/4 = 39 = {3,13}
 CIRCLES_PER_SEED: int = 7
