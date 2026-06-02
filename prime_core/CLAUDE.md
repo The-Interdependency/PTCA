@@ -64,9 +64,15 @@ guard (5), routing steps (6). Stdlib `unittest` only — no pytest dependency.
 
 - **Canon documents absent.** `canon_definitions_invariants-1.md` and
   `consciousness_primes_prediction1.pdf` are not in any accessible repo. The
-  stratum definitions, composition counts, and the coherence-prime ladder are
-  encoded here as the handoff *stated* them, not as verified canon. The
-  `COHERENCE_FACTOR_UNIVERSE` in `constants.py` is provisional.
+  stratum definitions and composition counts are encoded here as the handoff
+  *stated* them, not as verified canon.
+  - **Resolved (coherence-prime rule):** `constants.py::is_coherence_prime` now
+    uses the *recursive* definition (kernel factors must themselves be earlier
+    coherence primes) instead of the old provisional `COHERENCE_FACTOR_UNIVERSE`
+    frozen set, which silently diverged at p=4373. The canonical single source
+    of truth is `interdependent_lib.coherence_primes`
+    (The-Interdependency/interdependent-lib); prime_core mirrors it verbatim
+    because importing the aggregator would invert the dependency graph.
 - **Validator absent.** `scripts/module_build_check.py` / `universal_parser.py`
   (handoff §5) exist in no repo, so the MODULE_BUILD manifest was validated by
   hand, not mechanically. Vendor them when a source appears.
