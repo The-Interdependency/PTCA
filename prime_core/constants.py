@@ -112,15 +112,19 @@ def _build_coherence_up_to(limit: int) -> None:
 def is_coherence_prime(p: int) -> bool:
     """Coherence-prime membership test (handoff §1.4 / §4.5).
 
-    p is a coherence prime iff:
-      - p is prime and p % 4 == 1, and
-      - q = (p - 1) // 4 is square-free, and
-      - every prime factor of q is itself a coherence prime (recursive).
+    p is a coherence prime iff either:
+      - p is in the base set {3, 5, 7}, or
+      - p is prime, p % 4 == 1, q = (p - 1) // 4 is square-free, and every
+        prime factor of q is itself a coherence prime (recursive).
 
-    Base set is {3, 5, 7}. Mirrors ``interdependent_lib.coherence_primes``
-    exactly — see the CANON note above.
+    Mirrors ``interdependent_lib.coherence_primes`` exactly — see the CANON
+    note above.
     """
     if p < 2:
+        return False
+    if p in _COHERENCE_BASE:
+        return True
+    if not _is_prime(p) or p % 4 != 1:
         return False
     _build_coherence_up_to(p)
     return p in _coherence_known
