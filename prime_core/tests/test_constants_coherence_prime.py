@@ -22,12 +22,28 @@ class TestCoherencePrimeGuard(unittest.TestCase):
         for p in (5, 13, 29, 53, 61, 157, 349, 421):
             self.assertTrue(is_coherence_prime(p), f"{p} should be a coherence prime")
 
+    def test_base_elements_are_coherence_primes(self):
+        # Canon defines the base set C0 = {3, 5, 7}; these ARE coherence primes
+        # even though 3 and 7 are ≡ 3 mod 4 (the mod-4 rule applies to p > 7).
+        # The previous frozen-universe implementation wrongly rejected 3 and 7;
+        # aligning to interdependent_lib.coherence_primes fixes that.
+        for p in (3, 5, 7):
+            self.assertTrue(is_coherence_prime(p), f"{p} is a base coherence prime")
+
     def test_rejects_non_coherence_primes(self):
-        self.assertFalse(is_coherence_prime(3))    # 3 ≡ 3 mod 4
-        self.assertFalse(is_coherence_prime(7))    # 7 ≡ 3 mod 4
         self.assertFalse(is_coherence_prime(17))   # (17-1)/4 = 4 not square-free
+        self.assertFalse(is_coherence_prime(19))   # (19-1)%4 = 2 ≠ 0
         self.assertFalse(is_coherence_prime(9))    # not prime
         self.assertFalse(is_coherence_prime(101))  # (101-1)/4 = 25 = 5*5 not square-free
+
+    def test_recursive_ancestry_4373(self):
+        # Regression: the old frozen-universe guard (capped at 421) wrongly
+        # rejected 4373. Its kernel (4373-1)/4 = 1093 is itself a coherence
+        # prime, so the recursive rule admits it — the smallest prime where the
+        # recursive canon and the old static approximation diverge.
+        # Shared oracle: interdependent_lib.coherence_primes.
+        self.assertTrue(is_coherence_prime(1093))
+        self.assertTrue(is_coherence_prime(4373))
 
     def test_seed_count_is_coherence_prime(self):
         # Design-choice mode: SEED_COUNT is tunable but must land on the ladder.
