@@ -103,7 +103,10 @@ python -m unittest discover -s prime_core/tests -v
 | 3    | slot     | 7    | heptagram slots |
 
 Total cells: **26 796**. Stored as a flat list; access via
-`PTCATensor.get/set/add(node, sentinel, phase, slot[, value])`.
+`PTCATensor.get(node, sentinel, phase, slot)`,
+`set(node, sentinel, phase, slot, value)`, and
+`add(node, sentinel, phase, slot, delta)` (the trailing `value`/`delta` is
+required for `set`/`add`).
 
 ### Sentinel Channels
 
@@ -146,7 +149,7 @@ from ptca.provenance import build_block, hash_block, verify_chain, extend_chain
 
 inst = PTCAInstance(model_id="...", caller_id="user:alice")
 inst.push_context({"role": "user", "content": "Hello", "tokens": 5})
-inst.record_provenance(data={"source": "user", "action": "query"})  # extends SHA-256 chain, updates S1
+inst.record_provenance(payload={"source": "user", "action": "query"})  # extends SHA-256 chain, updates S1 (kwarg is payload=, keyword-only; optional timestamp=)
 result = inst.route(node=0, phase=0, slot=0, s1=1.0, s5=0.9)        # ExchangeResult
 ctx = inst.snapshot()  # dict keyed S5_CONTEXT … S9_AUDIT
 ```
