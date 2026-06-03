@@ -10,6 +10,7 @@ Installed skills:
 - `msdmd/` — Module Self-Declared Metadata Markdown
 - `test-build/` — test contract metadata blocks
 - `meta-module-build/` — metadata-first module scaffolding
+- `manifest/` — living-spec generator for `CLAUDE.md` (vendored from `The-Interdependency/skill-lib@ddec346`); CI runs `generate.py --check`. Refresh with `python .agents/skills/manifest/generate.py --write`.
 
 Agents working in this repo should read `meta-module-build/SKILL.md` before
 creating new modules, routes, services, schemas, adapters, workers, engines,

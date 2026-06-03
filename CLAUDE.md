@@ -28,6 +28,31 @@ The PTCA repo hosts **two independent pure-Python packages**:
 > access). `pyproject.toml` declares `license = { text = "AGPL-3.0-or-later" }`.
 > Do not "fix" the license to Apache anywhere.
 
+<!-- BEGIN GENERATED:manifest -->
+<!-- Generated from pyproject + repo tree by .agents/skills/manifest/generate.py — DO NOT EDIT BY HAND. Refresh with `python .agents/skills/manifest/generate.py --write`. -->
+
+| Field | Value |
+|---|---|
+| Package | `ptca-lib` |
+| Version | `0.1.0` |
+| Description | PTCA — Probabilistic Tensor Context Architecture: sentinel channels, prime-node tensor, provenance hashing, and exchange mechanics |
+| Status | hmmm |
+| Python | >=3.9 |
+| License | AGPL-3.0-or-later |
+| Build backend | `setuptools.build_meta` |
+| Author(s) | Erin Patrick Spencer <wayseer@interdependentway.org> |
+| Repository | https://github.com/The-Interdependency/PTCA |
+| Runtime dependencies | none (stdlib only) |
+| Optional extras | none |
+| Keywords | none |
+| CI workflows | `manifest-check.yml` |
+| Top-level directories | `prime_core/` · `ptca/` · `tests/` |
+
+<sub>Derived from `pyproject.toml` + the repo tree. Unknown fields surface as `hmmm` rather than a guess.</sub>
+<!-- END GENERATED:manifest -->
+
+> The block above is generated from `pyproject.toml` + the repo tree by the `manifest` living-spec tool (`.agents/skills/manifest/`) and gated in CI (`.github/workflows/manifest-check.yml`) — do not hand-edit between the markers; run `python .agents/skills/manifest/generate.py --write` after changing version/deps/layout.
+
 ---
 
 ## Repository Layout
