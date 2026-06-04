@@ -1,0 +1,26 @@
+name: manifest drift check
+
+# Living-spec gate: fails if CLAUDE.md's generated manifest block has drifted
+# from pyproject.toml / the repo tree. Refresh locally with:
+#   python .agents/skills/manifest/generate.py --write
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Vendored generate.py matches skill-lib (no local fork)
+        run: cd .agents/skills/manifest && sha256sum -c generate.py.sha256
+      - name: Check CLAUDE.md manifest block is in sync
+        run: python .agents/skills/manifest/generate.py --root . --check
