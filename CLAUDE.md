@@ -221,6 +221,34 @@ invariant unless the relevant test is tightened).
 
 ---
 
+## Role in the prime-tensor stack
+
+Canonical role-and-boundary map:
+`The-Interdependency/interdependent-lib : docs/prime-tensor-stack.md` — the single
+source of truth for how the family composes. Leaf repos **cite** it; none imports
+it, and it moves **no** theorem / proof / empirical status between repos.
+
+- **PTCA's canonical stack role is layer 3: it organizes *seeds into a core*** (the
+  core is itself a tensor) and produces structural **motion** consumed by **ZFAE**
+  (inference). The neighbouring layers: **PCNA** = layer 1 (tensors +
+  back-propagation → weights; **7 tensors per circle**; the only differentiable
+  layer), **PCTA** = layer 2 (circles → seeds; **7 circles per seed**; repo
+  forthcoming). **PCEA** is the **orthogonal guardian** (encryption / privacy
+  seal) — not a stack layer.
+- **`prime_core/` vs. the canonical split.** `prime_core/`'s three strata
+  (tensor → circle → seed → core, above) are the *in-repo realization* of what the
+  stack canon documents **across** repos: PCNA owns the tensor + circle level
+  **and** back-propagation, PCTA owns the seed layer, and PTCA owns the core. The
+  full tensor→core span living inside `prime_core/` is an **experiment**; the
+  canonical per-repo split is the one documented in the stack map. This locates
+  `prime_core/`'s design within the org-wide map — it does not contradict it.
+- **Seeds per core.** `prime_core` uses **157** *experimentally* (`SEED_COUNT`); the
+  canonical value is **`hmmm`** (unsettled). The stack map's `hmmm` list likewise
+  flags the acronym expansions and the formal definition of "motion" as open — do
+  not encode them as fact.
+
+---
+
 ## Key Conventions & Gotchas
 
 - **No external runtime dependencies** — stdlib only. Do not add runtime deps to
@@ -264,7 +292,10 @@ New module work starts with a `MODULE_BUILD` block (see the example at the top o
 
 | Repo | Role |
 |------|------|
-| The-Interdependency/interdependent-lib | Meta-package; canonical `coherence_primes` source |
+| The-Interdependency/interdependent-lib | Meta-package; canonical `coherence_primes` source + `docs/prime-tensor-stack.md` (the stack role-and-boundary map) |
 | The-Interdependency/a0 | Agent platform — primary consumer of PTCA |
-| The-Interdependency/pcea | Sibling encryption library (same 53-prime design) |
+| The-Interdependency/pcea | Sibling encryption library (same 53-prime design); stack **guardian** (orthogonal — not a layer) |
+| The-Interdependency/pcna | Stack layer 1 — tensors + back-propagation → weights (source-only) |
+| (forthcoming) pcta | Stack layer 2 — circles → seeds; repo not yet created |
+| The-Interdependency/ZFAE | Stack inference layer — consumes PCNA weights + PTCA/PCTA motion (runtime in a0) |
 | erinepshovel-code/UnitCircle | Prime distribution visualization |
