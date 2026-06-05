@@ -228,24 +228,40 @@ Canonical role-and-boundary map:
 source of truth for how the family composes. Leaf repos **cite** it; none imports
 it, and it moves **no** theorem / proof / empirical status between repos.
 
-- **PTCA's canonical stack role is layer 3: it organizes *seeds into a core*** (the
-  core is itself a tensor) and produces structural **motion** consumed by **ZFAE**
-  (inference). The neighbouring layers: **PCNA** = layer 1 (tensors +
-  back-propagation → weights; **7 tensors per circle**; the only differentiable
-  layer), **PCTA** = layer 2 (circles → seeds; **7 circles per seed**; repo
-  forthcoming). **PCEA** is the **orthogonal guardian** (encryption / privacy
-  seal) — not a stack layer.
+- **PTCA's canonical stack role is layer 3 — composing *seeds into a core*** (the
+  core is itself a tensor) and producing structural **motion** consumed by
+  **ZFAE** (inference, which uses PCNA weights + PCNA circles / PCTA seeds / PTCA
+  cores as phase-harmonic propagation + auditing). The canonical **stack-role
+  expansion of PTCA is "Prime Tensor Core Architecture"** (maintainer-resolved,
+  2026-06-05). The neighbouring layers: **PCNA** = layer 1, *Prime Circle Neural
+  Architecture* (arranges tensors as circles in a back-propagating NN → weights;
+  the only differentiable layer), **PCTA** = layer 2, *Prime Circled Tensor
+  Architecture* (`The-Interdependency/pcta`; circles → seeds). **PCEA** = *Prime
+  Circular Encryption Algorithm*, the **orthogonal guardian** — "last state as
+  key for this state" at every layer — not a stack layer.
+- **Composition counts are variable.** Tensors→circle, circles→seed, and
+  seeds→core are all variable; the only invariant is that every circle, seed, and
+  core is itself a tensor. (The old "7 tensors/circle, 7 circles/seed" framing was
+  a nominal heptagram motif, not a structural requirement.)
+- **Package name vs. stack-role name (note).** The **published `ptca-lib`
+  package** self-identifies as *"Probabilistic Tensor Context Architecture"* (a
+  sentinel-channel / prime-node tensor system); the **layer-3 stack role** (seeds
+  → core) named *"Prime Tensor Core Architecture"* is realized by **`prime_core`**,
+  not by `ptca-lib`. Reconciling the published package's name/description with the
+  resolved stack-role name is a **packaging decision** (it would change the
+  pyproject description + the generated manifest block + possibly the PyPI
+  artifact) and is intentionally **not** done in this docs-only update — flag for
+  the maintainer.
 - **`prime_core/` vs. the canonical split.** `prime_core/`'s three strata
-  (tensor → circle → seed → core, above) are the *in-repo realization* of what the
-  stack canon documents **across** repos: PCNA owns the tensor + circle level
-  **and** back-propagation, PCTA owns the seed layer, and PTCA owns the core. The
-  full tensor→core span living inside `prime_core/` is an **experiment**; the
-  canonical per-repo split is the one documented in the stack map. This locates
-  `prime_core/`'s design within the org-wide map — it does not contradict it.
-- **Seeds per core.** `prime_core` uses **157** *experimentally* (`SEED_COUNT`); the
-  canonical value is **`hmmm`** (unsettled). The stack map's `hmmm` list likewise
-  flags the acronym expansions and the formal definition of "motion" as open — do
-  not encode them as fact.
+  (tensor → circle → seed → core) are the *in-repo realization* of what the stack
+  canon documents **across** repos: PCNA owns the tensor + circle level **and**
+  back-propagation, PCTA owns the seed layer, and PTCA owns the core. The full
+  tensor→core span living inside `prime_core/` is an **experiment**; the canonical
+  per-repo split is the one documented in the stack map.
+- **Seeds per core.** Variable (the only invariant is that every seed and the
+  core are tensors). `prime_core` uses **157** *experimentally* (`SEED_COUNT`) — a
+  tunable choice, not a canonical count. The only remaining stack `hmmm` is the
+  formal definition of "motion"; the acronym expansions are now resolved (above).
 
 ---
 
@@ -295,7 +311,7 @@ New module work starts with a `MODULE_BUILD` block (see the example at the top o
 | The-Interdependency/interdependent-lib | Meta-package; canonical `coherence_primes` source + `docs/prime-tensor-stack.md` (the stack role-and-boundary map) |
 | The-Interdependency/a0 | Agent platform — primary consumer of PTCA |
 | The-Interdependency/pcea | Sibling encryption library (same 53-prime design); stack **guardian** (orthogonal — not a layer) |
-| The-Interdependency/pcna | Stack layer 1 — tensors + back-propagation → weights (source-only) |
-| (forthcoming) pcta | Stack layer 2 — circles → seeds; repo not yet created |
-| The-Interdependency/ZFAE | Stack inference layer — consumes PCNA weights + PTCA/PCTA motion (runtime in a0) |
+| The-Interdependency/pcna | Stack layer 1 — Prime Circle Neural Architecture; tensors → circles, back-propagation → weights (source-only) |
+| The-Interdependency/pcta | Stack layer 2 — Prime Circled Tensor Architecture; circles → seeds |
+| The-Interdependency/ZFAE | Stack inference layer — Zeta Function Alpha Echo; uses PCNA weights + circles / seeds / cores as phase-harmonic propagation (runtime in a0) |
 | erinepshovel-code/UnitCircle | Prime distribution visualization |
