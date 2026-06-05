@@ -260,8 +260,12 @@ it, and it moves **no** theorem / proof / empirical status between repos.
   per-repo split is the one documented in the stack map.
 - **Seeds per core.** Variable (the only invariant is that every seed and the
   core are tensors). `prime_core` uses **157** *experimentally* (`SEED_COUNT`) — a
-  tunable choice, not a canonical count. The only remaining stack `hmmm` is the
-  formal definition of "motion"; the acronym expansions are now resolved (above).
+  tunable choice, not a canonical count.
+- **"Motion" — formal definition.** The structural output a core hands to ZFAE is
+  the **Fickian gradient flux** `J = −D ∇φ` (Fick's first law: structure diffuses
+  down its field gradient; structural / non-differentiable — the `∇φ` is a field
+  gradient, not an autodiff gradient). With this, **no stack `hmmm` remains** (the
+  acronym expansions and variable-count rule are resolved above).
 
 ---
 
