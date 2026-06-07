@@ -1,4 +1,4 @@
-# CLAUDE.md — PTCA: Probabilistic Tensor Context Architecture
+# CLAUDE.md — PTCA: Prime Tensor Core Architecture
 
 This file gives AI assistants context needed to work effectively in this repository.
 
@@ -9,8 +9,8 @@ This file gives AI assistants context needed to work effectively in this reposit
 The PTCA repo hosts **two independent pure-Python packages**:
 
 1. **`ptca-lib`** (package dir `ptca/`, pip name **`ptca-lib`**, v0.1.0) — a
-   zero-dependency library implementing the **Probabilistic Tensor Context
-   Architecture**: a sentinel-channel, prime-node 4-D tensor system. This is the
+   zero-dependency library implementing the **Prime Tensor Core Architecture**:
+   a sentinel-channel, prime-node 4-D tensor system. This is the
    shippable package (`pyproject.toml` packages `ptca*` only).
 2. **`prime_core/`** — an experimental **three-stratum PTCA core**
    (tensor / circle / seed) layered on UCNS composition. It is *independent of*
@@ -35,7 +35,7 @@ The PTCA repo hosts **two independent pure-Python packages**:
 |---|---|
 | Package | `ptca-lib` |
 | Version | `0.1.0` |
-| Description | PTCA — Probabilistic Tensor Context Architecture: sentinel channels, prime-node tensor, provenance hashing, and exchange mechanics |
+| Description | PTCA — Prime Tensor Core Architecture: sentinel channels, prime-node tensor, provenance hashing, and exchange mechanics |
 | Status | hmmm |
 | Python | >=3.9 |
 | License | AGPL-3.0-or-later |
@@ -243,15 +243,15 @@ it, and it moves **no** theorem / proof / empirical status between repos.
   seeds→core are all variable; the only invariant is that every circle, seed, and
   core is itself a tensor. (The old "7 tensors/circle, 7 circles/seed" framing was
   a nominal heptagram motif, not a structural requirement.)
-- **Package name vs. stack-role name (note).** The **published `ptca-lib`
-  package** self-identifies as *"Probabilistic Tensor Context Architecture"* (a
-  sentinel-channel / prime-node tensor system); the **layer-3 stack role** (seeds
-  → core) named *"Prime Tensor Core Architecture"* is realized by **`prime_core`**,
-  not by `ptca-lib`. Reconciling the published package's name/description with the
-  resolved stack-role name is a **packaging decision** (it would change the
-  pyproject description + the generated manifest block + possibly the PyPI
-  artifact) and is intentionally **not** done in this docs-only update — flag for
-  the maintainer.
+- **Package name vs. stack-role realization (note).** The **published `ptca-lib`
+  package** is now named *"Prime Tensor Core Architecture"* (aligned with the
+  resolved stack canon, maintainer-approved) — a sentinel-channel / prime-node
+  tensor system. The actual **layer-3 seeds → core composition** is realized by
+  **`prime_core`**, not by `ptca-lib`; both live in this repo under the PTCA /
+  "Prime Tensor Core Architecture" umbrella. (The earlier flag — that the package
+  still carried the old *"Probabilistic Tensor Context Architecture"* expansion —
+  is resolved by this rename: pip name stays `ptca-lib`; only the
+  description/expansion changed.)
 - **`prime_core/` vs. the canonical split.** `prime_core/`'s three strata
   (tensor → circle → seed → core) are the *in-repo realization* of what the stack
   canon documents **across** repos: PCNA owns the tensor + circle level **and**

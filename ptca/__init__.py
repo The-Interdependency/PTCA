@@ -1,5 +1,5 @@
 """
-ptca-lib — Probabilistic Tensor Context Architecture
+ptca-lib — Prime Tensor Core Architecture
 
 Zero-dependency pure-Python library implementing:
 
