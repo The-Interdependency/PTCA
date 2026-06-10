@@ -20,13 +20,11 @@ The PTCA repo hosts **two independent pure-Python packages**:
 **Python requirement:** ≥ 3.9
 **External dependencies:** none (stdlib only — `hashlib`, `dataclasses`, `uuid`,
 `json`, `time`, `typing`)
-**License:** **dual** — AGPL-3.0-or-later (default) OR a commercial license. See
-`LICENSE` and `LICENSE-COMMERCIAL.md`.
+**License:** MIT. See `LICENSE`.
 
-> License note: `LICENSE` is currently an **interim notice** — the full verbatim
-> AGPL-3.0 text has not been pasted in yet (the build environment had no network
-> access). `pyproject.toml` declares `license = { text = "AGPL-3.0-or-later" }`.
-> Do not "fix" the license to Apache anywhere.
+> License note: relicensed from AGPL-3.0-or-later + commercial dual-license to
+> pure MIT for frictionless adoption. `pyproject.toml` declares
+> `license = { text = "MIT" }` and `LICENSE` holds the verbatim MIT text.
 
 <!-- BEGIN GENERATED:manifest -->
 <!-- Generated from pyproject + repo tree by .agents/skills/manifest/generate.py — DO NOT EDIT BY HAND. Refresh with `python .agents/skills/manifest/generate.py --write`. -->
@@ -38,7 +36,7 @@ The PTCA repo hosts **two independent pure-Python packages**:
 | Description | PTCA — Prime Tensor Core Architecture: sentinel channels, prime-node tensor, provenance hashing, and exchange mechanics |
 | Status | hmmm |
 | Python | >=3.9 |
-| License | AGPL-3.0-or-later |
+| License | MIT |
 | Build backend | `setuptools.build_meta` |
 | Author(s) | Erin Patrick Spencer <wayseer@interdependentway.org> |
 | Repository | https://github.com/The-Interdependency/PTCA |
@@ -84,8 +82,7 @@ prime_core/            # experimental three-stratum core (NOT packaged)
 
 .agents/skills/        Agent skills (meta-module-build, msdmd, test-build)
 pyproject.toml         Package config (setuptools; packages ptca* only)
-LICENSE                Interim AGPL-3.0-or-later notice
-LICENSE-COMMERCIAL.md  Commercial dual-license offer
+LICENSE                MIT license text
 CLAUDE.md              This file
 ```
 
