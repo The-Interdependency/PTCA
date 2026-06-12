@@ -20,11 +20,12 @@ The PTCA repo hosts **two independent pure-Python packages**:
 **Python requirement:** ≥ 3.9
 **External dependencies:** none (stdlib only — `hashlib`, `dataclasses`, `uuid`,
 `json`, `time`, `typing`)
-**License:** MIT. See `LICENSE`.
+**License:** MPL-2.0 (weak copyleft — embed anywhere, but changes to these files
+must be published). See `LICENSE`.
 
-> License note: relicensed from AGPL-3.0-or-later + commercial dual-license to
-> pure MIT for frictionless adoption. `pyproject.toml` declares
-> `license = { text = "MIT" }` and `LICENSE` holds the verbatim MIT text.
+> License note: relicensed to MPL-2.0 from MIT (which had itself superseded an
+> AGPL-3.0-or-later + commercial dual-license). `pyproject.toml` declares
+> `license = { text = "MPL-2.0" }` and `LICENSE` holds the verbatim MPL-2.0 text.
 
 <!-- BEGIN GENERATED:manifest -->
 <!-- Generated from pyproject + repo tree by .agents/skills/manifest/generate.py — DO NOT EDIT BY HAND. Refresh with `python .agents/skills/manifest/generate.py --write`. -->
@@ -36,7 +37,7 @@ The PTCA repo hosts **two independent pure-Python packages**:
 | Description | PTCA — Prime Tensor Core Architecture: sentinel channels, prime-node tensor, provenance hashing, and exchange mechanics |
 | Status | hmmm |
 | Python | >=3.9 |
-| License | MIT |
+| License | MPL-2.0 |
 | Build backend | `setuptools.build_meta` |
 | Author(s) | Erin Patrick Spencer <wayseer@interdependentway.org> |
 | Repository | https://github.com/The-Interdependency/PTCA |
@@ -82,7 +83,7 @@ prime_core/            # experimental three-stratum core (NOT packaged)
 
 .agents/skills/        Agent skills (meta-module-build, msdmd, test-build)
 pyproject.toml         Package config (setuptools; packages ptca* only)
-LICENSE                MIT license text
+LICENSE                MPL-2.0 license text
 CLAUDE.md              This file
 ```
 
